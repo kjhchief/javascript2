@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let user = {name : "김기정", 
+                age : 20,
+                weight : null,
+                birthday : new Date(),
+                toString : function(){
+                  console.log(`이름: ${this.name}, 나이: ${this.age}`);
+                }
+              };
+                
+    console.log(typeof user);
+
+    // 서버로 전송하기 위해 문자열(JSON)로 전환
+    // object -> string : 직렬화(마샬링)
+    let userJson = JSON.stringify(user);
+    console.log(typeof userJson);
+    console.log(userJson);
+
+    let array = ["Java", "JavaScript", "C++", {name: "김기정", age:10}];
+    arrayJson = JSON.stringify(array);
+    console.log(arrayJson);
+
+    // 필터링
+    let filteredUser = JSON.stringify(user, ["name", "age"]);
+    console.log(filteredUser);
+              
+
+
+
+    // 웹 서버에서 수신한 JSON이라 가정
+    let jsonText = '{"name" : "김기정", "age" : 20, "subject" : "무역학과"}';
+    let student = JSON.parse(jsonText); // string-> OBject : 역직렬화(언마샬링)
+    console.log(typeof jsonText);
+    console.dir(student);
+    
+    // 객체로 전환되면 쉽게 속성에 접근 가능
+    console.log(student.name);
+    console.log(student.age);
+    console.log(student['subject']);
+
+    let arrayObject = JSON.parse(arrayJson);
+    console.log(arrayObject[0]);
+    console.log(arrayObject[3].name);
+
+    
+
+
+
+
+  </script>
+</body>
+</html>
