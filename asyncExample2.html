@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 웹 서버 로그인 (비동기처리)
+    function loginUser(id, passwd, onSuccess, onError){
+      // 서버 통신에 약 2초 소요 가정
+      setTimeout(function(){
+        // 2초 후 데이터 주신 완료 가정
+        // 정상 처리
+        if(id === 'bangry' && passwd ==='1111'){
+          onSuccess(id);
+        }else{ // 에러 발생
+          onError(new Error("회원정보를 확인하여 주세요"));
+        }
+      }, 2000);
+    }
+
+    // 사용자 아이디에 해당하는 업무 수신
+    function getJob(id, onSuccess, onError){
+      // 서버 통신에 약 3초 소요 가정
+      setTimeout(function(){
+        // 2초 후 데이터 주신 완료 가정
+        // 정상 처리
+        if(id === 'bangry'){
+          onSuccess(`{ "id" : "${id}" , "job" : "Teacher"}`);
+        }else{ // 에러 발생
+          onError(new Error("회원정보를 확인하여 주세요"));
+        }
+      }, 3000);
+    }
+
+    // 실제 서버 통신 
+    const uid = 'bangry';
+    const pw = "1111";
+
+    loginUser(uid, pw, function(loginId){
+      // 정상 로그인 시
+      // 회원 정보 요청
+      getJob(uid, function(userJson){
+        // 정보 정상 수신시 (JSON)
+        let userObject = JSON.parse(userJson);
+        alert(`아이디: ${userObject.id}, 업무: ${userObject.job}`);
+      }, function(error){
+        alert(error);
+      });
+
+    }, function(error){
+      alert(error);
+    });
+
+
+  </script>
+</head>
+<body>
+  
+
+</body>
+</html>

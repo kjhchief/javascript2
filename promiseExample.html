@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="module" defer>
+    // Promise 객체를 이용한 비동기 통신하기
+    console.log("프로그램 실행됨...");
+    function serverRequest(resolve, reject){
+      console.log("서버와의 통신 등.. 오랜 시간 걸리는 비동기 작업 실행");
+      let id = "bangry";
+      // 서버 통신코드
+      let serverMessage = '{"title": "중화요리책", "author": "김기정"}';
+      // 정상 수신시
+      if(id === "bangry"){
+        resolve(serverMessage);
+      }else{
+        reject(new Error("데이터 수신 실패"))
+      }
+    }
+
+    new Promise(serverRequest)
+    .then(value => {
+      const cookbook = JSON.parse(value);
+      document.querySelector("#book").innerHTML = `${cookbook.title} : ${cookbook.author}`
+    })
+    .catch(error => alert(error))
+    .finally(() => alert("항상 실행"));
+
+    console.log("프로그램 종료됨...");
+
+
+  </script>
+</head>
+<body>
+  <h2 id="book"></h2>
+  
+
+</body>
+</html>

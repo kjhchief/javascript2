@@ -32,8 +32,12 @@
     // 필터링
     let filteredUser = JSON.stringify(user, ["name", "age"]);
     console.log(filteredUser);
-              
-
+    console.clear();
+    
+    let filteredUser2 = JSON.stringify(user, function(key, value){
+      return key === "weight" ? 50 : value ;
+    });
+    console.log(filteredUser2);
 
 
     // 웹 서버에서 수신한 JSON이라 가정
@@ -50,6 +54,14 @@
     let arrayObject = JSON.parse(arrayJson);
     console.log(arrayObject[0]);
     console.log(arrayObject[3].name);
+
+    // 필터링
+    let userObject2= JSON.parse(filteredUser2, function(key, value){
+      return key === "birthday" ? new Date(value) : value;
+    });
+
+    console.dir(userObject2);
+    console.log(userObject2.birthday.toLocaleString());
 
     
 

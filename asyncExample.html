@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="button">클릭</button>
+
+  <script type="module" defer>
+    // 웹 API를 이용한 비동기 프로그래밍 
+    console.log("1출력");
+
+    function asyncTask(){
+      console.log("2출력");
+      // 추후 서버통신 코드가 들어갈 예정입니다.
+    }
+    setTimeout(asyncTask, 3000);
+    console.log("3출력");
+
+    // 비동기 이벤트 처리
+    document.querySelector("#button").addEventListener("click", event =>alert("버튼 클릭하였습니다."));
+
+    // 시간 보여주기
+    function showClock(){
+      const time = new Date().toLocaleTimeString();
+      document.querySelector("#clock").innerHTML = time;
+    }
+    setInterval(showClock, 1000)
+
+  </script>
+
+  <span id="clock" style="font-size: 30pt"></span>
+
+</body>
+</html>
